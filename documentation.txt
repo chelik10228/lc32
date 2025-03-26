@@ -6,9 +6,9 @@ Lasto Core 32 is maded Xi-816 with FedouM, xi is a main maker Lasto Core, FedouM
 Lasto Core 32 it's a first version of CPU Lasto Core, this version is maded by Xi-816.
 
 [Registers]
-Lasto Core 32 is have this registers now:
-	"A", "B", "C", "D".
-Yes, this is a easy registers on now.
+Right now Lasto Core 32 has these registers:
+  A,B,C,D(general purpose),F(flags),SP(stack pointer),PC(program counter)
+This may change later
 
 [Instructions]
 Lasto Core 32 is have this instructions now:

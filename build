@@ -2,5 +2,5 @@
 
 set -xe
 
-gcc src/cpu.c -lm -o lasto
+gcc src/cpu.c -lm -o lc32
 
