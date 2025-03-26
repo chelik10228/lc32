@@ -1,102 +1,113 @@
-                                        ?           ??         ??????????     ????????????       ????????????
-                                        ?          ?  ?        ?                    ?            ?          ?
-                                        ?         ??????       ??????????           ?            ?          ?
-                                        ?        ?      ?               ?           ?            ?          ?
-                                        ??????? ?        ?     ??????????           ?            ????????????
 
-1. About
-2. Registers
-3. Instructions
-4. Hello World Output
-5. NASM vs LASM
+    #
+    #
+    #    ####     ####     #        ####
+    #   #    #   #    #    #       #    #
+    #        #   #       #####     #    #
+    #    #####    ####     #       #    #
+    #   #    #        #    #       #    #
+    #   #    #   #    #    #    #  #    #
+    #    #####    ####      ####    ####
 
-1. [About]
-Lasto Core 32 is maded Xi-816 with FedouM, xi is a main maker Lasto Core, FedouM is not learning NASM, but now FedouM is learning NASM.
-Lasto Core 32 it's a first version of CPU Lasto Core, this version is maded by Xi-816.
+[About]
+lc32 is an emulator for the Lasto Core 32 CPU. The lc32 implementation is written in C.
+Lasto Core 32 was made by Xi816 & FedouM. It is a first generation of the Lasto Core CPU.
 
-2. [Registers]
+[Registers]
 Right now Lasto Core 32 has these registers:
-  A,B,C,D(general purpose),F(flags),SP(stack pointer),PC(program counter)
-This may change later
+  General purpose: A, B, C, D
+  Flags:           F
+  Stack pointer:   SP
+  Program counter: PC
+This may change in the future.
 
-3. [Instructions]
-Lasto Core 32 is have this instructions now:
-	"BR (i dont know, this instruction is named xi)", "LD - LoaD", "ADD - ADDing", "SUB - SUBtract", "MUL - MULtiply", "DIV - DIVide", "LDR - LoaD Register", "ST (i dont know, this instruction is named xi)",
-	"STP - SToP", "BRK - BReaK", "BRZ (i dont know, this instruction is named xi)", "CPR - ComPare Register", "INR - INteRrupt", "INT - INTerrupt".
-Good instructions.
+[Instructions]
+Lasto Core 32 is have these instructions:
+  BR     Branch
+  LD     Load to register
+  ADD    Add values
+  SUB    Subtract values
+  MUL    Multiply values
+  DIV    Divide values
+  LDR    Load register indirect
+  ST     Store
+  STP    Stop
+  BRK    Break (non-maskable interrupt)
+  BRZ    Break if zero
+  CPR    Compare register
 
-4. [Hello World Output]
-To output hello world on Lasto Assembly (yes lasm is existing) you need input this:
-	"	LD D, HW 	; load string address to D"
-	"LOOP:"
-	"	LDR D, A 	; load [D] to A"
-	"	INR DIV 	; increment D"
-	"		CPR A, 0	; compare char with \0 (NUL)"
-	"	BRZ END		; branch if zero/equal"
-	"	ST A, byte #F00000	; load the character to the interrupt argument table"
-	"	INT 1 	; output char"
-	"	BR LOOP 	; loop"
-	"END:"
-	"	STP"
-	"HW: B "Hello, World!\n\0" "
-This is code is outputing the "Hello, World!".
-It's a example, this code like a infinity loop on NASM, like:
-	"org 0x7C00"
-	"bits 16"
+[Hello World Output]
+To output hello world on Lasto Assembly (yes lasm exists ??? wait what, no it doesn't ???) you need input this:
+  LD D, HW    ; load string address to D
+  LOOP:
+    LDR D, A  ; load [D] to A
+    INR DIV   ; increment D
+    CPR A, 0  ; compare char with \0 (NUL)
+    BRZ END   ; branch if zero/equal
+    ST A, byte #F00000  ; load the character to the interrupt argument table
+    INT 1   ; output char
+  BR LOOP   ; loop
+  END:
+    STP
+  HW: B "Hello, World!\n\0"
+This is code is outputting "Hello, World!".
 
-	"main:"
-	"	hlt		; stop working CPU in vm"
+Here's an example, this code is an infinite loop on NASM (x86-16 with no OS), like:
+  org 0x7C00
+  bits 16
 
-	".halt:"
-	"	jmp .halt	; making a infinity jump to .halt"
+  main:
+    hlt    ; stop working CPU in vm
+
+  .halt:
+    jmp .halt  ; making a infinity jump to .halt
 This code is outputing none, but making a infinity loop.
 
-5. [NASM vs LASM]
+[NASM vs LASM]
 NASM is good assembly, LASM too.
-To output the Hello World on NASM, you need input this:
-	"bits 16"
-	"org 0x7C00"
+Here is the Hello World on NASM x86-16 with no OS:
+  bits 16
+  org 0x7C00
 
-	"jmp start"
-	
-	"putchar:"
-	"	mov ah, 0x0E"
-	"	mov bh, 0"
-	"	int 10h"
-	"	ret"
-	
-	"puts:"
-	".loop:"
-	"	lodsb"
-	"	or al, al"
-	"	jz .done"
-	"	call putchar"
-	"	inc dx"
-	"	jmp .loop"
-	".done:"
-	"	ret"
+  jmp start
+  
+  putchar:
+    mov ah, 0x0E
+    mov bh, 0
+    int 10h
+    ret
+  
+  puts:
+  .loop:
+    lodsb
+    or al, al
+    jz .done
+    call putchar
+    inc dx
+    jmp .loop
+  .done:
+    ret
 
-	"start:"
-	"	mov ax, 0"
-	"	mov ds, ax"
-	"	mov es, ax"
+  start:
+    mov ax, 0
+    mov ds, ax
+    mov es, ax
 
-	"	mov ss, ax"
-	"	mov sp, 0x7C00"
+    mov ss, ax
+    mov sp, 0x7C00
 
-	"	mov si, msg00"
-	"	call puts"
+    mov si, msg00
+    call puts
 
 
-	".done:"
-	"	hlt"
-	"	jmp .halt"
+  .done:
+    hlt
+    jmp .halt
 
-	".halt:"
-	"	jmp .halt"
+  .halt:
+    jmp .halt
 
-	"msg00: db "Hello World!", 0x0A, 0x0D, 0x00 "
+  msg00: db Hello World!, 0x0A, 0x0D, 0x00 
 
-	"times 510-($-$$) db 0x00"
-	"dw 0AA55h"
-It's code is outputing "Hello World!" on NASM, it's hard but on LASM and GovnASM its easy.
+  times 510-($-$$) db 0x00
+  dw 0AA55h
