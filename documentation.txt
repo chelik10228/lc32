@@ -1,22 +1,31 @@
-===========================
-Lasto Core 32 Documentation
-===========================
-[About]
+                                        ?           ??         ??????????     ????????????       ????????????
+                                        ?          ?  ?        ?                    ?            ?          ?
+                                        ?         ??????       ??????????           ?            ?          ?
+                                        ?        ?      ?               ?           ?            ?          ?
+                                        ??????? ?        ?     ??????????           ?            ????????????
+
+1. About
+2. Registers
+3. Instructions
+4. Hello World Output
+5. NASM vs LASM
+
+1. [About]
 Lasto Core 32 is maded Xi-816 with FedouM, xi is a main maker Lasto Core, FedouM is not learning NASM, but now FedouM is learning NASM.
 Lasto Core 32 it's a first version of CPU Lasto Core, this version is maded by Xi-816.
 
-[Registers]
+2. [Registers]
 Right now Lasto Core 32 has these registers:
   A,B,C,D(general purpose),F(flags),SP(stack pointer),PC(program counter)
 This may change later
 
-[Instructions]
+3. [Instructions]
 Lasto Core 32 is have this instructions now:
 	"BR (i dont know, this instruction is named xi)", "LD - LoaD", "ADD - ADDing", "SUB - SUBtract", "MUL - MULtiply", "DIV - DIVide", "LDR - LoaD Register", "ST (i dont know, this instruction is named xi)",
 	"STP - SToP", "BRK - BReaK", "BRZ (i dont know, this instruction is named xi)", "CPR - ComPare Register", "INR - INteRrupt", "INT - INTerrupt".
 Good instructions.
 
-[Hello World Output]
+4. [Hello World Output]
 To output hello world on Lasto Assembly (yes lasm is existing) you need input this:
 	"	LD D, HW 	; load string address to D"
 	"LOOP:"
@@ -42,7 +51,7 @@ It's a example, this code like a infinity loop on NASM, like:
 	"	jmp .halt	; making a infinity jump to .halt"
 This code is outputing none, but making a infinity loop.
 
-[NASM vs LASM]
+5. [NASM vs LASM]
 NASM is good assembly, LASM too.
 To output the Hello World on NASM, you need input this:
 	"bits 16"
