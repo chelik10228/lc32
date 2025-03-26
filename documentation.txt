@@ -9,6 +9,12 @@
     #   #    #   #    #    #    #  #    #
     #    #####    ####      ####    ####
 
+1. About
+2. Registers
+3. Instructions
+4. Hello World Output
+5. NASM vs LASM
+
 [About]
 lc32 is an emulator for the Lasto Core 32 CPU. The lc32 implementation is written in C.
 Lasto Core 32 was made by Xi816 & FedouM. It is a first generation of the Lasto Core CPU.
