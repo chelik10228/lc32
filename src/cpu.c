@@ -291,7 +291,7 @@ void execute(CPU* cpu) {
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    puts("lasto: error: file not given");
+    puts("usage:\n\nrun bin file: lc32 <bin name>");
     exit(1);
   }
   FILE* fl = fopen(argv[1], "r");
